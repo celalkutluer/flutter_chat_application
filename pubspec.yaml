@@ -44,6 +44,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/google_signin_button.png
+    - assets/images/google_signin_button_white.png
     - images/img_not_available.jpeg
     - images/mimi1.gif
     - images/mimi2.gif

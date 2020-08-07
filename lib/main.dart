@@ -11,14 +11,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.lightBlueAccent,
       ),
-      home: Scaffold(
+      home: LoginScreen(),
+      /*Scaffold(
         appBar: AppBar(
           title: Text('Chat App', style: TextStyle(fontSize: 26.0, color: Colors.white, fontWeight: FontWeight.bold),),
         ),
         body: Center(
           child: Text('Mesajlaşma uygulamasına hoşgeldiniz!!!', style: TextStyle(fontSize: 20.0, color: Colors.blueAccent),),
         ),
-      ),
+      )*/
       debugShowCheckedModeBanner: false,
     );
   }
