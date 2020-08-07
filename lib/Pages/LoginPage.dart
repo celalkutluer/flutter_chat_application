@@ -1,7 +1,9 @@
-import 'dart:async';
+//import 'dart:async';
+//import 'dart:html';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/Pages/HomePage.dart';
 import 'package:flutter_chat_app/Widgets/ProgressWidget.dart';
@@ -12,11 +14,50 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
+  LoginScreen({Key key}) : super(key: key);
+
   @override
   LoginScreenState createState() => LoginScreenState();
 }
 
 class LoginScreenState extends State<LoginScreen> {
+  final GoogleSignIn googleSingIn = GoogleSignIn();
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  SharedPreferences preferences;
+
+  bool isLoggedIn = false;
+  bool isLoading = false;
+  FirebaseUser currentUser;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    isSingedIn();
+  }
+
+  isSingedIn() async {
+    this.setState(() {
+      isLoggedIn = true;
+    });
+    preferences = await SharedPreferences.getInstance();
+    isLoggedIn = await googleSingIn.isSignedIn();
+    if (isLoggedIn) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(
+            currentUserId: preferences.getString('id'),
+          ),
+        ),
+      );
+    }
+    this.setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +89,7 @@ class LoginScreenState extends State<LoginScreen> {
               height: 8,
             ),
             GestureDetector(
+              onTap: controlSingIn,
               child: Center(
                 child: Column(
                   children: [
@@ -65,8 +107,8 @@ class LoginScreenState extends State<LoginScreen> {
                     ),
                     Padding(
                       padding: EdgeInsets.all(1.0),
-                      child: circularProgress(),
-                    )
+                      child: isLoading ? circularProgress() : Container(),
+                    ),
                   ],
                 ),
               ),
@@ -75,5 +117,76 @@ class LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Future<Null> controlSingIn() async {
+    preferences = await SharedPreferences.getInstance();
+    this.setState(() {
+      isLoading = true;
+    });
+    GoogleSignInAccount googleUser = await googleSingIn.signIn();
+    GoogleSignInAuthentication googleSignInAuthentication =
+        await googleUser.authentication;
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+        idToken: googleSignInAuthentication.idToken,
+        accessToken: googleSignInAuthentication.accessToken);
+    FirebaseUser firebaseUser =
+        (await firebaseAuth.signInWithCredential(credential)).user;
+    //SingIn Success
+    if (firebaseUser != null) {
+      //check if already singup
+      final QuerySnapshot resultQuery = await Firestore.instance
+          .collection('users')
+          .where('id', isEqualTo: firebaseUser.uid)
+          .getDocuments();
+      final List<DocumentSnapshot> documentSnapshots = resultQuery.documents;
+      //Save Data to Firestore
+      if (documentSnapshots.length == 0) {
+        Firestore.instance
+            .collection('users')
+            .document(firebaseUser.uid)
+            .setData({
+          'nickname': firebaseUser.displayName,
+          'photoUrl': firebaseUser.photoUrl,
+          'id': firebaseUser.uid,
+          'aboutMe': 'i am using Chat App ',
+          'createAt': DateTime.now().millisecondsSinceEpoch.toString(),
+          'chattingWith': null,
+        });
+        //Write Data to local
+        currentUser = firebaseUser;
+        await preferences.setString('id', currentUser.uid);
+        await preferences.setString('nickname', currentUser.displayName);
+        await preferences.setString('photoUrl', currentUser.photoUrl);
+      } else {
+        //Write Data to local
+        currentUser = firebaseUser;
+        await preferences.setString('id', documentSnapshots[0]['id']);
+        await preferences.setString(
+            'nickname', documentSnapshots[0]['nickname']);
+        await preferences.setString(
+            'photoUrl', documentSnapshots[0]['photoUrl']);
+        await preferences.setString('aboutMe', documentSnapshots[0]['aboutMe']);
+      }
+      Fluttertoast.showToast(msg: 'Congratulations, Sing in Successful.');
+      this.setState(() {
+        isLoading = false;
+      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(
+            currentUserId: firebaseUser.uid,
+          ),
+        ),
+      );
+    }
+    //SingIn Not Success-SingIn Faild
+    else {
+      Fluttertoast.showToast(msg: 'Try Again, Sing in Failed');
+      this.setState(() {
+        isLoading = false;
+      });
+    }
   }
 }
