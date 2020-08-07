@@ -4,6 +4,13 @@ Celal KUTLUER-2020-Bozok Üniversitesi Bilgisayar Mühendisliği Yazılım Staj�
 
 Uygulamanın ilk hali
 ![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_01.jpg)
+Uygulamanın ilk hali
+![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_02.jpg)
+
+
+
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
