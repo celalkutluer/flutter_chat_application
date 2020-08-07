@@ -1,8 +1,6 @@
-# flutter_chat_app
+# Flutter Mesajlaşma Uygulaması
 
-Celal KUTLUER-2020-Yazılım Stajı
-
-A new Flutter application.
+Celal KUTLUER-2020-Bozok Üniversitesi Bilgisayar Mühendisliği Yazılım Stajı projesidir.
 
 ## Getting Started
 
