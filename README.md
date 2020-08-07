@@ -1,5 +1,7 @@
 # flutter_chat_app
 
+Celal KUTLUER-2020-Yazılım Stajı
+
 A new Flutter application.
 
 ## Getting Started
