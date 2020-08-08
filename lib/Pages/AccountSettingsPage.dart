@@ -84,7 +84,68 @@ class SettingsScreenState extends State<SettingsScreen> {
         isLoading = true;
       });
     }
-//uploadImageToFirestoreAndStorage();
+    uploadImageToFirestoreAndStorage();
+  }
+
+  Future uploadImageToFirestoreAndStorage() async {
+    String mFileName = id;
+    StorageReference storageReference =
+        FirebaseStorage.instance.ref().child(mFileName);
+    StorageUploadTask storageUploadTask =
+        storageReference.putFile(imageFileAvatar);
+    StorageTaskSnapshot storageTaskSnapshot;
+    storageUploadTask.onComplete.then((value) {
+      if (value.error == null) {
+        storageTaskSnapshot = value;
+        storageTaskSnapshot.ref.getDownloadURL().then((newImageDownloadUrl) {
+          photoUrl = newImageDownloadUrl;
+
+          Firestore.instance.collection('users').document(id).updateData({
+            'photoUrl': photoUrl,
+            'aboutMe': aboutMe,
+            'nickname': nickname,
+          }).then((data) async{
+            await preferences.setString('photoUrl', photoUrl);
+            setState(() {
+              isLoading=false;
+            });
+            Fluttertoast.showToast(msg: 'Updated Successfully.',backgroundColor: Colors.grey);
+          });
+        }, onError: (errorMsg) {
+          setState(() {
+            isLoading = false;
+          });
+          Fluttertoast.showToast(msg: 'Error occured in getting Download Url.',backgroundColor: Colors.grey);
+        });
+      }
+    }, onError: (errorMsg) {
+      setState(() {
+        isLoading = false;
+      });
+      Fluttertoast.showToast(msg: errorMsg.toString(),backgroundColor: Colors.grey);
+    });
+  }
+
+ void updateData(){
+    nickNameFocusNode.unfocus();
+    aboutMeFocusNode.unfocus();
+    setState(() {
+      isLoading=false;
+    });
+    Firestore.instance.collection('users').document(id).updateData({
+      'photoUrl': photoUrl,
+      'aboutMe': aboutMe,
+      'nickname': nickname,
+    }).then((data) async{
+      await preferences.setString('photoUrl', photoUrl);
+      await preferences.setString('aboutMe', aboutMe);
+      await preferences.setString('nickname', nickname);
+
+      setState(() {
+        isLoading=false;
+      });
+      Fluttertoast.showToast(msg: 'Updated Successfully.',backgroundColor: Colors.grey);
+    });
   }
 
   @override
@@ -231,11 +292,8 @@ class SettingsScreenState extends State<SettingsScreen> {
               ),
               //Buttons
               Container(
-                child:
-                FlatButton(
-                  onPressed: () {
-                    print('clicked');
-                  },
+                child: FlatButton(
+                  onPressed: updateData,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
@@ -264,7 +322,6 @@ class SettingsScreenState extends State<SettingsScreen> {
                     style: TextStyle(color: Colors.white70, fontSize: 14.0),
                   ),
                   padding: EdgeInsets.fromLTRB(50.0, 10.0, 50.0, 10.0),
-
                 ),
               )
             ],

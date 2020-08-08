@@ -168,7 +168,7 @@ class LoginScreenState extends State<LoginScreen> {
             'photoUrl', documentSnapshots[0]['photoUrl']);
         await preferences.setString('aboutMe', documentSnapshots[0]['aboutMe']);
       }
-      Fluttertoast.showToast(msg: 'Congratulations, Sing in Successful.');
+      Fluttertoast.showToast(msg: 'Congratulations, Sing in Successful.',backgroundColor: Colors.grey);
       this.setState(() {
         isLoading = false;
       });
@@ -183,7 +183,7 @@ class LoginScreenState extends State<LoginScreen> {
     }
     //SingIn Not Success-SingIn Faild
     else {
-      Fluttertoast.showToast(msg: 'Try Again, Sing in Failed');
+      Fluttertoast.showToast(msg: 'Try Again, Sing in Failed',backgroundColor: Colors.grey);
       this.setState(() {
         isLoading = false;
       });
