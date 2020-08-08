@@ -23,12 +23,75 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
+  TextEditingController searchTEC = TextEditingController();
+
+  homePageHeader() {
+    return AppBar(
+      automaticallyImplyLeading: false, //remove the back button
+      actions: [
+        IconButton(
+          icon: Icon(
+            Icons.settings,
+            size: 30,
+            color: Colors.white70,
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Settings(),
+              ),
+            );
+          },
+        ),
+      ],
+      backgroundColor: Colors.lightBlue,
+      title: Container(
+        margin: EdgeInsets.only(bottom: 4.0),
+        child: TextFormField(
+          style: TextStyle(fontSize: 18.0, color: Colors.white70),
+          controller: searchTEC,
+          decoration: InputDecoration(
+            hintText: 'Search Here...',
+            hintStyle: TextStyle(color: Colors.white70),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.white70),
+            ),
+            filled: true,
+            prefixIcon: Icon(
+              Icons.person_pin,
+              color: Colors.white70,
+              size: 30.0,
+            ),
+            suffixIcon: IconButton(
+              icon: Icon(
+                Icons.clear,
+                color: Colors.white70,
+              ),
+              onPressed: emptyTextFormField,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  emptyTextFormField() {
+    searchTEC.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return RaisedButton.icon(
-        onPressed: logoutUser,
-        icon: Icon(Icons.close),
-        label: Text('Sing Out'));
+    return Scaffold(
+      appBar: homePageHeader(),
+      body: RaisedButton.icon(
+          onPressed: logoutUser,
+          icon: Icon(Icons.close),
+          label: Text('Sing Out')),
+    );
   }
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -39,11 +102,9 @@ class HomeScreenState extends State<HomeScreen> {
     await googleSignIn.signOut();
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => MyApp()),
-            (Route<dynamic> route) => false);
+        (Route<dynamic> route) => false);
   }
-
 }
-
 
 class UserResult extends StatelessWidget {
   @override
