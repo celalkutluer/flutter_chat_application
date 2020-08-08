@@ -123,7 +123,6 @@ class HomeScreenState extends State<HomeScreen> {
 
           if (currentUserId != document['id']) {
             searchUserResult.add(userResult);
-            print(searchUserResult);
           }
         });
         return ListView(

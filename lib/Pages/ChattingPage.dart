@@ -71,6 +71,26 @@ class ChatScreenState extends State<ChatScreen> {
 
   final TextEditingController textMessageTEC = TextEditingController();
   final FocusNode textMessageFocusNode = FocusNode();
+  bool isDisplaySticker;
+  bool isLoading;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    textMessageFocusNode.addListener(textMessageOnFocusChange);
+    isDisplaySticker = false;
+    isLoading = false;
+  }
+
+  textMessageOnFocusChange() {
+    if (textMessageFocusNode.hasFocus) {
+      //hide sticker whenever keypad appears
+      setState(() {
+        isDisplaySticker = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,12 +102,154 @@ class ChatScreenState extends State<ChatScreen> {
                 //create controllers TODO
                 //create list of message
                 createListMessages(),
+                //show sticker
+                (isDisplaySticker ? createStickers() : Container()),
+                //input controllers
                 createInput(),
               ],
-            )
+            ),
+            createLoading(),
           ],
         ),
-        onWillPop: null);
+        onWillPop: onBackPress);
+  }
+
+  createLoading() {
+    return Positioned(
+      child: isLoading ? circularProgress() : Container(),
+    );
+  }
+
+  Future<bool> onBackPress() {
+    if (isDisplaySticker) {
+      setState(() {
+        isDisplaySticker = false;
+      });
+    } else {
+      Navigator.pop(context);
+    }
+    return Future.value(false);
+  }
+
+  createStickers() {
+    return Container(
+      child: Column(
+        children: [
+          //first row
+          Row(
+            children: [
+              FlatButton(
+                //onPressed: onSendMessage('mimi1',2),
+                child: Image.asset(
+                  'images/mimi1.gif',
+                  width: 50.0,
+                  height: 50.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              FlatButton(
+                //onPressed: onSendMessage('mimi2',2),
+                child: Image.asset(
+                  'images/mimi2.gif',
+                  width: 50.0,
+                  height: 50.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              FlatButton(
+                //onPressed: onSendMessage('mimi3',2),
+                child: Image.asset(
+                  'images/mimi3.gif',
+                  width: 50.0,
+                  height: 50.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          ),
+          //2nd row
+          Row(
+            children: [
+              FlatButton(
+                //onPressed: onSendMessage('mimi4',2),
+                child: Image.asset(
+                  'images/mimi4.gif',
+                  width: 50.0,
+                  height: 50.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              FlatButton(
+                //onPressed: onSendMessage('mimi5',2),
+                child: Image.asset(
+                  'images/mimi5.gif',
+                  width: 50.0,
+                  height: 50.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              FlatButton(
+                //onPressed: onSendMessage('mimi6',2),
+                child: Image.asset(
+                  'images/mimi6.gif',
+                  width: 50.0,
+                  height: 50.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          ),
+          //3nd row
+          Row(
+            children: [
+              FlatButton(
+                //onPressed: onSendMessage('mimi7',2),
+                child: Image.asset(
+                  'images/mimi7.gif',
+                  width: 50.0,
+                  height: 50.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              FlatButton(
+                //onPressed: onSendMessage('mimi8',2),
+                child: Image.asset(
+                  'images/mimi8.gif',
+                  width: 50.0,
+                  height: 50.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              FlatButton(
+                //onPressed: onSendMessage('mimi9',2),
+                child: Image.asset(
+                  'images/mimi9.gif',
+                  width: 50.0,
+                  height: 50.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          )
+        ],
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      ),
+      decoration: BoxDecoration(
+          border: Border(top: BorderSide(color: Colors.grey, width: 0.5)),
+          color: Colors.white70),
+      padding: EdgeInsets.all(5.0),
+      height: 180.0,
+    );
+  }
+
+  void getSticker() {
+    textMessageFocusNode.unfocus();
+    setState(() {
+      isDisplaySticker = !isDisplaySticker;
+    });
   }
 
   createListMessages() {
@@ -104,7 +266,7 @@ class ChatScreenState extends State<ChatScreen> {
     return Container(
       child: Row(
         children: [
-          //emoji icon button TODO
+          //emoji icon button
           Material(
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 1.0),
@@ -123,7 +285,7 @@ class ChatScreenState extends State<ChatScreen> {
               child: IconButton(
                 icon: Icon(Icons.face),
                 color: Colors.lightBlueAccent,
-                onPressed: () => print('clicked'),
+                onPressed: getSticker,
                 //onPressed: getImageFromGallery, TODO
               ),
             ),

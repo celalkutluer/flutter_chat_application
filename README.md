@@ -38,6 +38,8 @@ Celal KUTLUER-2020-Bozok Üniversitesi Bilgisayar Mühendisliği Yazılım Staj�
 # 12
 ![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_12.jpg)
 
+# 13
+![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_13.jpg)
 
 
 
