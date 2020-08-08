@@ -18,7 +18,7 @@ class User {
       id: doc.documentID,
       photoUrl: doc['photoUrl'],
       nickname: doc['nickname'],
-      createdAt: doc['createdAt'],
+      createdAt: doc['createAt'],
     );
   }
 }
