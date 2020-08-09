@@ -595,7 +595,7 @@ class ChatScreenState extends State<ChatScreen> {
                 icon: Icon(Icons.image),
                 color: primaryProjectColor,
                 onPressed: getImage,
-                //onPressed: getImageFromGallery, TODO
+                //onPressed: getImageFromGallery,
               ),
             ),
             color: Colors.white70,
@@ -607,7 +607,7 @@ class ChatScreenState extends State<ChatScreen> {
                 icon: Icon(Icons.face),
                 color: primaryProjectColor,
                 onPressed: getSticker,
-                //onPressed: getImageFromGallery, TODO
+                //onPressed: getImageFromGallery,
               ),
             ),
             color: Colors.white70,
