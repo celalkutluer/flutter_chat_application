@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
@@ -7,20 +8,41 @@ class FullPhoto extends StatelessWidget {
   FullPhoto({Key key, @required this.url}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {}
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.lightBlueAccent,
+        iconTheme: IconThemeData(color: Colors.white70),
+        title: Text(
+          'Full Image',
+          style: TextStyle(color: Colors.white70,fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: FullPhotoScreen(url:url),
+    );
+  }
 }
 
 class FullPhotoScreen extends StatefulWidget {
+  final String url;
+
+  FullPhotoScreen({Key key, @required this.url}) : super(key: key);
+
   @override
-  State createState() => FullPhotoScreenState();
+  State createState() => FullPhotoScreenState(url:url);
 }
 
 class FullPhotoScreenState extends State<FullPhotoScreen> {
+  final String url;
+
+  FullPhotoScreenState({Key key, @required this.url});
   @override
   void initState() {
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {}
+  Widget build(BuildContext context) {
+    return Container(child: PhotoView(imageProvider: NetworkImage(url),),);
+  }
 }
