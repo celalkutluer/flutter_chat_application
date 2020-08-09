@@ -7,6 +7,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/Pages/HomePage.dart';
 import 'package:flutter_chat_app/Widgets/ProgressWidget.dart';
+import 'package:flutter_chat_app/Widgets/projectColors.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -68,8 +69,8 @@ class LoginScreenState extends State<LoginScreen> {
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
-              Color.fromRGBO(236, 0, 140, 1),
-              Color.fromRGBO(252, 103, 103, 1),
+              primaryProjectColor,
+              accentProjectColor,
             ],
           ),
         ),

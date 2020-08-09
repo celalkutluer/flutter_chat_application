@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/Models/user.dart';
+import 'package:flutter_chat_app/Widgets/projectColors.dart';
 import 'package:flutter_chat_app/main.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_chat_app/Pages/ChattingPage.dart';
@@ -50,7 +51,7 @@ class HomeScreenState extends State<HomeScreen> {
           },
         ),
       ],
-      backgroundColor: Colors.lightBlue,
+      backgroundColor: primaryProjectColor,
       title: Container(
         margin: EdgeInsets.only(bottom: 4.0),
         child: TextFormField(
@@ -142,14 +143,14 @@ class HomeScreenState extends State<HomeScreen> {
           children: [
             Icon(
               Icons.group,
-              color: Colors.lightBlueAccent,
+              color: primaryProjectColor,
               size: 200.0,
             ),
             Text(
               'Search Users',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.lightBlueAccent,
+                color: primaryProjectColor,
                 fontSize: 50.0,
                 fontWeight: FontWeight.w500,
               ),

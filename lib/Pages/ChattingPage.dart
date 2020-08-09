@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/Widgets/FullImageWidget.dart';
 import 'package:flutter_chat_app/Widgets/ProgressWidget.dart';
+import 'package:flutter_chat_app/Widgets/projectColors.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -28,7 +29,7 @@ class Chat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: primaryProjectColor,
         actions: [
           Padding(
             padding: EdgeInsets.all(8.0),
@@ -86,7 +87,6 @@ class ChatScreenState extends State<ChatScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     textMessageFocusNode.addListener(textMessageOnFocusChange);
     isDisplaySticker = false;
@@ -128,7 +128,7 @@ class ChatScreenState extends State<ChatScreen> {
           children: [
             Column(
               children: [
-                //create controllers TODO
+                //create controllers
                 //create list of message
                 createListMessages(),
                 //show sticker
@@ -287,7 +287,7 @@ class ChatScreenState extends State<ChatScreen> {
           ? Center(
               child: CircularProgressIndicator(
                 valueColor:
-                    AlwaysStoppedAnimation<Color>(Colors.lightBlueAccent),
+                    AlwaysStoppedAnimation<Color>(primaryProjectColor),
               ),
             )
           : StreamBuilder(
@@ -295,7 +295,7 @@ class ChatScreenState extends State<ChatScreen> {
                   .collection('messages')
                   .document(chatId)
                   .collection(chatId)
-                  .orderBy('timestamp',descending: false)
+                  .orderBy('timestamp',descending: true)
                   .limit(20)
                   .snapshots(),
               builder: (context, snapshot) {
@@ -303,7 +303,7 @@ class ChatScreenState extends State<ChatScreen> {
                   return Center(
                     child: CircularProgressIndicator(
                       valueColor:
-                          AlwaysStoppedAnimation<Color>(Colors.lightBlueAccent),
+                          AlwaysStoppedAnimation<Color>(primaryProjectColor),
                     ),
                   );
                 } else {
@@ -311,7 +311,7 @@ class ChatScreenState extends State<ChatScreen> {
                   return ListView.builder(
                     padding: EdgeInsets.all(10.0),
                     itemBuilder: (context, index) => createItem(
-                        index, snapshot.data.documents[index]), //TODO
+                        index, snapshot.data.documents[index]),
                     itemCount: snapshot.data.documents.length,
                     controller: listScrollController,
                   );
@@ -358,7 +358,7 @@ class ChatScreenState extends State<ChatScreen> {
                   ),
                   padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
                   decoration: BoxDecoration(
-                    color: Colors.lightBlueAccent,
+                    color: primaryProjectColor,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   margin: EdgeInsets.only(
@@ -373,7 +373,7 @@ class ChatScreenState extends State<ChatScreen> {
                             placeholder: (context, url) => Container(
                               child: CircularProgressIndicator(
                                 valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.lightBlueAccent),
+                                    primaryProjectColor),
                               ),
                               width: 200.0,
                               height: 200.0,
@@ -451,7 +451,7 @@ class ChatScreenState extends State<ChatScreen> {
                           placeholder: (context, url) => Container(
                             child: CircularProgressIndicator(
                               valueColor: AlwaysStoppedAnimation<Color>(
-                                  Colors.lightBlueAccent),
+                                  primaryProjectColor),
                             ),
                             width: 35.0,
                             height: 35.0,
@@ -496,7 +496,7 @@ class ChatScreenState extends State<ChatScreen> {
                                   placeholder: (context, url) => Container(
                                     child: CircularProgressIndicator(
                                       valueColor: AlwaysStoppedAnimation<Color>(
-                                          Colors.lightBlueAccent),
+                                          primaryProjectColor),
                                     ),
                                     width: 200.0,
                                     height: 200.0,
@@ -593,7 +593,7 @@ class ChatScreenState extends State<ChatScreen> {
               margin: EdgeInsets.symmetric(horizontal: 1.0),
               child: IconButton(
                 icon: Icon(Icons.image),
-                color: Colors.lightBlueAccent,
+                color: primaryProjectColor,
                 onPressed: getImage,
                 //onPressed: getImageFromGallery, TODO
               ),
@@ -605,7 +605,7 @@ class ChatScreenState extends State<ChatScreen> {
               margin: EdgeInsets.symmetric(horizontal: 1.0),
               child: IconButton(
                 icon: Icon(Icons.face),
-                color: Colors.lightBlueAccent,
+                color: primaryProjectColor,
                 onPressed: getSticker,
                 //onPressed: getImageFromGallery, TODO
               ),
@@ -632,7 +632,7 @@ class ChatScreenState extends State<ChatScreen> {
               margin: EdgeInsets.symmetric(horizontal: 8.0),
               child: IconButton(
                   icon: Icon(Icons.send),
-                  color: Colors.lightBlueAccent,
+                  color: primaryProjectColor,
                   onPressed: () => onSendMessage(textMessageTEC.text, 0)),
             ),
             color: Colors.white70,

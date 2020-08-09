@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/Widgets/ProgressWidget.dart';
+import 'package:flutter_chat_app/Widgets/projectColors.dart';
 import 'package:flutter_chat_app/main.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
@@ -19,7 +20,7 @@ class Settings extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white70),
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: primaryProjectColor,
         title: Text(
           'Account Settings',
           style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold),
@@ -55,7 +56,6 @@ class SettingsScreenState extends State<SettingsScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     readDataFromLocal();
@@ -170,7 +170,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                                         strokeWidth: 2.0,
                                         valueColor:
                                             AlwaysStoppedAnimation<Color>(
-                                                Colors.lightBlueAccent),
+                                                primaryProjectColor),
                                       ),
                                       width: 200.0,
                                       height: 200.0,
@@ -234,14 +234,14 @@ class SettingsScreenState extends State<SettingsScreen> {
                       style: TextStyle(
                           fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.bold,
-                          color: Colors.lightBlueAccent),
+                          color: primaryProjectColor),
                     ),
                     margin: EdgeInsets.only(left: 10.0, bottom: 5.0, top: 10.0),
                   ),
                   Container(
                     child: Theme(
                       data: Theme.of(context)
-                          .copyWith(primaryColor: Colors.lightBlueAccent),
+                          .copyWith(primaryColor: primaryProjectColor),
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: 'e.g Celal KUTLUER',
@@ -264,14 +264,14 @@ class SettingsScreenState extends State<SettingsScreen> {
                       style: TextStyle(
                           fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.bold,
-                          color: Colors.lightBlueAccent),
+                          color: primaryProjectColor),
                     ),
                     margin: EdgeInsets.only(left: 10.0, bottom: 5.0, top: 30.0),
                   ),
                   Container(
                     child: Theme(
                       data: Theme.of(context)
-                          .copyWith(primaryColor: Colors.lightBlueAccent),
+                          .copyWith(primaryColor: primaryProjectColor),
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: 'Bio...',
@@ -301,7 +301,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                     'Update',
                     style: TextStyle(fontSize: 16.0),
                   ),
-                  color: Colors.lightBlueAccent,
+                  color: primaryProjectColor,
                   highlightColor: Colors.grey,
                   splashColor: Colors.transparent,
                   textColor: Colors.white70,
@@ -312,7 +312,7 @@ class SettingsScreenState extends State<SettingsScreen> {
               //Logout Button
               Container(
                 child: RaisedButton(
-                  color: Colors.red,
+                  color: accentProjectColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),

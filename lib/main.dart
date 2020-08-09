@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/Widgets/projectColors.dart';
 import 'Pages/LoginPage.dart';
 
 void main() => runApp(MyApp());
@@ -9,7 +10,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Chat App',
       theme: ThemeData(
-        primaryColor: Colors.lightBlueAccent,
+        primaryColor: primaryProjectColor,
+        accentColor: accentProjectColor,
       ),
       home: LoginScreen(),
       /*Scaffold(
