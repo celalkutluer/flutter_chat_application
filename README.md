@@ -2,51 +2,10 @@
 
 Celal KUTLUER-2020-Bozok Üniversitesi Bilgisayar Mühendisliği Yazılım Stajı projesidir.
 
-# 1
-![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_01.jpg)
+![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/chat_app.gif)
 
-# 2
-![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_02.jpg)
 
-# 3
-![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_03.jpg)
-
-# 4
-![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_04.jpg)
-
-# 5
-![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_05.jpg)
-
-# 6
-![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_06.jpg)
-
-# 7
-![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_07.jpg)
-
-# 8
-![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_08.jpg)
-
-# 9
-![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_09.jpg)
-
-# 10
-![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_10.jpg)
-
-# 11
-![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_11.jpg)
-
-# 12
-![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_12.jpg)
-
-# 13
-![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_13.jpg)
-
-# 14
-![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_14.jpg)
-
-# 15
-![alt text](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/uyg_15.jpg)
-
+- [Proje Ekran Görüntülerileri](https://github.com/celalkutluer/flutter_chat_application/blob/master/images/screens/)
 
 ## Getting Started
 
