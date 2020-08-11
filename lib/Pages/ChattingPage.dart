@@ -651,7 +651,7 @@ class ChatScreenState extends State<ChatScreen> {
 
   void onSendMessage(String contentMsg, int type) {
     //type 0-its text messages
-    //type 1-its image file
+    //type 1-itsgönderen alan image file
     //type 2-its sticker-emoji-gifs
     if (contentMsg != null) {
       textMessageTEC.clear();
